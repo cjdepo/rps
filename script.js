@@ -13,24 +13,51 @@ function computerPlay () {
 
 
 function playRound (play) {
+    
+    // Player 
     player = play;
-    console.log(player);
+    const container = document.querySelector("#container");
+    const resultPlayer = document.createElement("div");
+    resultPlayer.textContent = "Your play: " + player;
+    container.appendChild(resultPlayer);
+
+    // Computer
     computer = computerPlay();
-    console.log(computer);
+    const resultComputer = document.createElement("div");
+    resultComputer.textContent = "Computer play: " + computer;
+    container.appendChild(resultComputer);
+
+    // Winner?
     if (player == computer) {
-        console.log("Tie!")
+        winner = "Tie!";
         //return "tie";
     } else if ((player == "rock" && computer == "scissor") | (player == "scissor" && computer == "paper") | (player == "paper" && computer == "rock")) {
-        console.log("Win Round!")
+        winner = "Win Round!";
         //return "win";
     } else if ((computer == "rock" && player == "scissor") | (computer == "scissor" && player == "paper") | (computer == "paper" && player == "rock")) {
-        console.log("Lose Round!")
+        winner = "Lose Round!";
         //return "lose";
     } else {
-        console.log("ERROR, try again. (rock/paper/scissor)");
+        winner = "ERROR, try again. (rock/paper/scissor)";
     }
+    const resultWinner = document.createElement("div");
+    resultWinner.textContent = "Result: " + winner;
+    container.appendChild(resultWinner);
+    
+    // Update and display score
+    if (winner == "Win Round!") {
+        playerScore += 1;
+    }
+    else if (winner == "Lose Round!") {
+        computerScore += 1;
+    }
+    playerDisplay.textContent = "Player Score: " + playerScore;
+    computerDisplay.textContent = "Computer Score: " + computerScore;
 
-    }    
+
+
+
+}    
    
 function game(numwins) {
     score = 0;
@@ -63,10 +90,18 @@ function game(numwins) {
 }    
 
 
-
+let playerScore = 0;
+let computerScore = 0;
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach( (button) => button.addEventListener('click', function() {playRound(button.id)}));
+let playerDisplay = document.createElement('div');
+container.appendChild(playerDisplay);
+let computerDisplay = document.createElement('div');
+container.appendChild(computerDisplay);
+
+
+
 
 
 // test = game(5);

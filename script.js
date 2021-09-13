@@ -44,7 +44,7 @@ function playRound (play) {
     resultWinner.textContent = "Result: " + winner;
     container.appendChild(resultWinner);
     
-    // Update and display score
+    // Update and display score and winner if score >= 5
     if (winner == "Win Round!") {
         playerScore += 1;
     }
@@ -53,6 +53,12 @@ function playRound (play) {
     }
     playerDisplay.textContent = "Player Score: " + playerScore;
     computerDisplay.textContent = "Computer Score: " + computerScore;
+    if (playerScore >= 5) {
+        winnerDisplay.textContent = "YOU WIN!!!!!!!!!!!!!";
+    }
+    else if (computerScore >= 5) {
+        winnerDisplay.textContent = "YOU LOSE!!!!!!!!!!!!";
+    }
 
 
 
@@ -89,16 +95,21 @@ function game(numwins) {
     }
 }    
 
-
+// init
 let playerScore = 0;
 let computerScore = 0;
-const buttons = document.querySelectorAll("button");
 
+// Create buttons and event listeners
+const buttons = document.querySelectorAll("button");
 buttons.forEach( (button) => button.addEventListener('click', function() {playRound(button.id)}));
+
+// Set initial display at top of page
 let playerDisplay = document.createElement('div');
 container.appendChild(playerDisplay);
 let computerDisplay = document.createElement('div');
 container.appendChild(computerDisplay);
+let winnerDisplay = document.createElement('div');
+container.appendChild(winnerDisplay);
 
 
 
